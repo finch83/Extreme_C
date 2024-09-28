@@ -1,4 +1,24 @@
 #include <stdio.h>
+#include <string.h>
+
+#define ABC 15
+#define ADD(a,b) a + b
+
+#define PRINT(a) printf("%d\n", a);
+#define LOOP(v, s, e) for (int v = s; v < e; ++v) {
+#define ENDLOOP }
+
+#define CMD(NAME) \
+    char NAME ## _cmd[256] = ""; \
+    strcpy(NAME ## _cmd, #NAME);
+
+
+void func_ptr(int* _i_ptr)
+{
+    int b = 10;
+    *_i_ptr = 5;
+    _i_ptr = &b;
+}
 
 void print_bytes(void* data, size_t data_len)
 {
@@ -59,16 +79,26 @@ int main(int argc, char* argv[])
     char* value = "123";
     print_sizeof(value);
     */
-   struct sample_t var;
-   var.first = 'A';
-   var.second = 'B';
-   var.third = 'C';
-   var.fourth = 765;
-   print_size(&var);
-   print_struct_bytes(&var);
-   printf("%d\n",sizeof(short));
+    struct sample_t var;
+    var.first = 'A';
+    var.second = 'B';
+    var.third = 'C';
+    var.fourth = 765;
+    print_size(&var);
+    print_struct_bytes(&var);
+    printf("%d\n",sizeof(short));
 
-    
+    int x = 4;
+    int* x_ptr = &x;
+
+    printf("Value before call: %d\n", x);
+    printf("Pointer before call: %p\n", (void*) x_ptr);
+
+    func_ptr(x_ptr);
+
+    printf("Value after call: %d\n", x);
+    printf("Pointer after call: %p\n", (void*) x_ptr);
+   
 
     return 0;
 }
